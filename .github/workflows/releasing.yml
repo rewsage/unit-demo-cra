@@ -21,12 +21,15 @@ jobs:
 
       - name: debug
         run: |
+          echo -------
           ls -a 
+          echo -------
           ls ../ -a
 
       - uses: JasonEtco/create-an-issue@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ADJECTIVE: great
         with:
           filename: CHANGELOG.md
 
