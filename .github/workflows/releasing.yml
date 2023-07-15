@@ -26,12 +26,14 @@ jobs:
           echo -------
           ls ../ -a
 
-      - uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ADJECTIVE: great
+      - uses: nashmaniac/create-issue-action@v1.2
+        name: Create Issue Action
         with:
-          filename: CHANGELOG.md
+          title: Release ${{ github.ref }}
+          token: ${{secrets.GITHUB_TOKEN}}
+          assignees: ${{github.actor}}
+          labels: RELEASE
+          body: Workflow failed for commit ${{github.sha}}
 
   # release:
   #   runs-on: ubuntu-latest
