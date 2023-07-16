@@ -31,13 +31,14 @@ jobs:
       - name: Create release version Issue
         uses: imjohnbo/issue-bot@3d96848fb5e9a4a473bb81ae62b4b4866a56e93a
         with:
+          assignes: "octocat, monalisa"
           labels: "RELEASE, ${{ steps.get_version.outputs.VERSION }}"
           title: "RELEASE ${{ steps.get_version.outputs.VERSION }}"
           body: |
             Author: ${{ github.actor }}
             Date: ${{ github.event.commits[0].timestamp }}
             Version: ${{ steps.get_version.outputs.VERSION }}
-            Changelog: ${{ steps.changelog.outputs.changes }}
+            Changelog:
           pinned: false
           close-previous: false
         env:
