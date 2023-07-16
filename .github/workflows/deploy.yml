@@ -2,8 +2,10 @@ name: deploy
 run-name: Deploy to github pages
 
 on:
+  workflow_dispatch:
   issues:
     types: [closed]
+
 permissions:
   contents: write
 
