@@ -31,12 +31,12 @@ jobs:
       - name: Create release version Issue
         uses: imjohnbo/issue-bot@v3
         with:
-          labels: "RELEASE, ${{ github.ref }}"
-          title: "RELEASE ${{ github.ref }}"
+          labels: "RELEASE, ${{ github.ref_name }}"
+          title: "RELEASE ${{ github.ref_name }}"
           body: |
             Author: ${{ github.actor }}
             Date: ${{ github.event.commits[0].timestamp }}
-            Version: ${{ github.ref }}
+            Version: ${{ github.ref_name }}
             Changelog: ${{ steps.changelog.outputs.changes }}
           pinned: false
           close-previous: false
