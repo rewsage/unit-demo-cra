@@ -1,4 +1,5 @@
-name: Commit convention compliance
+name: linting
+run-name: Commit convention compliance
 
 on:
   push:
