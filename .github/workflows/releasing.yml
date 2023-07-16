@@ -26,14 +26,29 @@ jobs:
           echo -------
           ls ../ -a
 
-      - uses: nashmaniac/create-issue-action@v1.2
-        name: Create Issue Action
+      - name: Create release version Issue
+        uses: imjohnbo/issue-bot@3d96848fb5e9a4a473bb81ae62b4b4866a56e93a
         with:
-          title: Release ${{ github.ref }}
-          token: ${{secrets.GITHUB_TOKEN}}
-          assignees: ${{github.actor}}
-          labels: RELEASE
-          body: Workflow failed for commit ${{github.sha}}
+          labels: "RELEASE, ${{ steps.get_version.outputs.VERSION }}"
+          title: "RELEASE ${{ steps.get_version.outputs.VERSION }}"
+          body: |
+            Author: ${{ github.actor }}
+            Date: ${{ github.event.commits[0].timestamp }}
+            Version: ${{ steps.get_version.outputs.VERSION }}
+            Changelog: ${{ steps.changelog.outputs.changes }}
+          pinned: false
+          close-previous: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - uses: nashmaniac/create-issue-action@v1.2
+      #   name: Create Issue Action
+      #   with:
+      #     title: Release ${{ github.ref }}
+      #     token: ${{secrets.GITHUB_TOKEN}}
+      #     assignees: ${{github.actor}}
+      #     labels: RELEASE
+      #     body: Workflow failed for commit ${{github.sha}}
 
   # release:
   #   runs-on: ubuntu-latest
