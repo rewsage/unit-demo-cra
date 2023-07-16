@@ -29,16 +29,15 @@ jobs:
           ls ../ -a
 
       - name: Create release version Issue
-        uses: imjohnbo/issue-bot@3d96848fb5e9a4a473bb81ae62b4b4866a56e93a
+        uses: imjohnbo/issue-bot@v3
         with:
-          name: "smth about us"
-          labels: "RELEASE, ${{ steps.get_version.outputs.VERSION }}"
-          title: "RELEASE ${{ steps.get_version.outputs.VERSION }}"
+          labels: "RELEASE, ${{ github.ref }}"
+          title: "RELEASE ${{ github.ref }}"
           body: |
             Author: ${{ github.actor }}
             Date: ${{ github.event.commits[0].timestamp }}
-            Version: ${{ steps.get_version.outputs.VERSION }}
-            Changelog:
+            Version: ${{ github.ref }}
+            Changelog: ${{ steps.changelog.outputs.changes }}
           pinned: false
           close-previous: false
         env:
