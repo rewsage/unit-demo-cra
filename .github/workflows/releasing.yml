@@ -20,13 +20,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
-
-      - name: debug
-        run: |
-          echo -------
-          ls -a 
-          echo -------
-          ls ../ -a
+          includeInvalidCommits: true
+          excludeTypes: other
 
       - name: Create release version Issue
         uses: imjohnbo/issue-bot@v3
