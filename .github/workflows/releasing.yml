@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - "v*"
+      - 'v\d+(.\d+){0,2}'
 
 jobs:
   issue:
@@ -38,28 +38,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - uses: nashmaniac/create-issue-action@v1.2
-      #   name: Create Issue Action
-      #   with:
-      #     title: Release ${{ github.ref }}
-      #     token: ${{secrets.GITHUB_TOKEN}}
-      #     assignees: ${{github.actor}}
-      #     labels: RELEASE
-      #     body: Workflow failed for commit ${{github.sha}}
-
-  # release:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: Create Release
-  #       id: create_release
-  #       uses: actions/create-release@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         tag_name: ${{ github.ref }}
-  #         release_name: Release ${{ github.ref }}
-  #         body: ${{ steps.changelog.outputs.changes }}
-  #         draft: false
-  #         prerelease: false
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref_name }}
+          body: ${{ steps.changelog.outputs.changes }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
