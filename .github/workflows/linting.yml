@@ -2,6 +2,7 @@ name: linting
 run-name: Commit convention compliance
 
 on:
+  workflow_dispatch:
   push:
   pull_request:
   issues:

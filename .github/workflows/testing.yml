@@ -2,6 +2,7 @@ name: testing
 run-name: Run unit and integration tests
 
 on:
+  workflow_dispatch:
   push:
   pull_request:
   issues:
