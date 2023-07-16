@@ -8,6 +8,8 @@ on:
 
 jobs:
   issue:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,7 +29,7 @@ jobs:
           ls ../ -a
 
       - name: Create release version Issue
-        uses: imjohnbo/issue-bot@3d96848fb5e9a4a473bb81ae62b4b4866a56e93a
+        uses: imjohnbo/issue-bot@v3
         with:
           labels: "RELEASE, ${{ steps.get_version.outputs.VERSION }}"
           title: "RELEASE ${{ steps.get_version.outputs.VERSION }}"
